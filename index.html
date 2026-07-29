@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadbury 5 Star | Interactive 3D Scroll Experience</title>
+  <meta name="description" content="Experience the ultimate chocolate indulgence with Cadbury 5 Star's 3D interactive scroll animation. Rich milk chocolate, flowing caramel, and crispy peanuts.">
+  
+  <!-- Fonts & Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS & Custom Theme Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed-variant": "#574500",
+            "primary-fixed": "#ffe088",
+            "on-surface-variant": "#d0c5af",
+            "on-secondary-fixed": "#251913",
+            "tertiary-fixed-dim": "#e5c500",
+            "tertiary": "#efcd07",
+            "surface-container-high": "#2c2a24",
+            "on-tertiary-container": "#514500",
+            "inverse-surface": "#e7e2d9",
+            "primary-container": "#d4af37",
+            "on-error": "#690005",
+            "surface-container-highest": "#37352f",
+            "surface-tint": "#e9c349",
+            "secondary-fixed": "#f5ded5",
+            "on-error-container": "#ffdad6",
+            "on-secondary-container": "#c6b1a8",
+            "tertiary-container": "#cfb200",
+            "secondary-fixed-dim": "#d8c2b9",
+            "on-secondary-fixed-variant": "#53433d",
+            "on-primary-fixed": "#241a00",
+            "primary-fixed-dim": "#e9c349",
+            "outline-variant": "#4d4635",
+            "on-surface": "#e7e2d9",
+            "background": "#15130e",
+            "surface-bright": "#3b3933",
+            "surface-container-low": "#1d1b16",
+            "on-secondary": "#3b2d27",
+            "primary": "#f2ca50",
+            "on-primary-container": "#554300",
+            "on-tertiary-fixed-variant": "#534600",
+            "inverse-primary": "#735c00",
+            "inverse-on-surface": "#32302a",
+            "on-tertiary-fixed": "#211b00",
+            "surface-dim": "#15130e",
+            "on-background": "#e7e2d9",
+            "on-primary": "#3c2f00",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "surface-container-lowest": "#100e09",
+            "surface-variant": "#37352f",
+            "secondary-container": "#53433d",
+            "surface-container": "#211f1a",
+            "surface": "#15130e",
+            "on-tertiary": "#393000",
+            "tertiary-fixed": "#ffe25a",
+            "secondary": "#d8c2b9",
+            "outline": "#99907c"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem"
+          },
+          spacing: {
+            "container-max": "1440px",
+            unit: "8px",
+            "margin-desktop": "80px",
+            "margin-mobile": "20px",
+            gutter: "32px"
+          },
+          fontFamily: {
+            "title-md": ["Manrope"],
+            "headline-lg-mobile": ["Bodoni Moda"],
+            "display-lg": ["Bodoni Moda"],
+            "body-sm": ["Manrope"],
+            "label-caps": ["Manrope"],
+            "headline-lg": ["Bodoni Moda"],
+            "body-lg": ["Manrope"]
+          },
+          fontSize: {
+            "title-md": ["20px", { lineHeight: "28px", letterSpacing: "0.05em", fontWeight: "600" }],
+            "headline-lg-mobile": ["32px", { lineHeight: "40px", fontWeight: "600" }],
+            "display-lg": ["80px", { lineHeight: "90px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.15em", fontWeight: "700" }],
+            "headline-lg": ["48px", { lineHeight: "56px", fontWeight: "600" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+</head>
+<body class="bg-background font-body-lg text-on-background">
+
+  <!-- 1. PRELOADER SCREEN -->
+  <div id="preloader">
+    <div class="loader-content">
+      <div class="loader-badge">Interactive 3D Experience</div>
+      <h1 class="loader-title">CADBURY <span>5 STAR</span></h1>
+      <p class="loader-subtitle">Preparing 210 high-definition frames of caramel & chocolate...</p>
+      
+      <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      
+      <div class="progress-stats">
+        <span id="progress-text">Loading frames...</span>
+        <span id="progress-percent">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. APPLICATION HEADER -->
+  <header class="app-header">
+    <a href="#" class="brand-logo">
+      <span class="stars">★★★★★</span>
+      <span class="brand-title">5<span>STAR</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <button id="sound-toggle-btn" class="btn-icon" aria-label="Toggle Sound">
+        <span>🔊</span>
+        <span class="sound-label">SOUND: OFF</span>
+      </button>
+
+      <button id="open-specs-btn" class="btn-icon">
+        <span>✨</span>
+        <span>INGREDIENTS & SPECS</span>
+      </button>
+
+      <a href="#experience" class="btn-cta">DO NOTHING</a>
+    </div>
+  </header>
+
+  <!-- 3. MAIN CANVAS SCROLL TRACK -->
+  <main class="scroll-track" id="experience">
+    <div class="sticky-viewport">
+      
+      <!-- Canvas Container -->
+      <div id="canvas-container">
+        <canvas id="frame-canvas"></canvas>
+      </div>
+
+      <!-- Vignette Overlay -->
+      <div class="vignette-overlay"></div>
+
+      <!-- Hero Overlay (Frame 1 - 25) -->
+      <div id="hero-overlay" class="hero-overlay active">
+        <div class="hero-tag">★ Premium Chocolate Sequence ★</div>
+        <h1 class="hero-heading">TASTE THE <span>GOLDEN MAGIC</span></h1>
+        <div class="scroll-prompt">
+          <div class="scroll-icon-anim"></div>
+          <span>Scroll to explore the sequence</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Story Cards Overlay -->
+      <div class="story-container">
+        
+        <!-- Chapter 01 -->
+        <article id="story-1" class="story-card pos-left">
+          <div class="chapter-tag">Chapter 01 — Unconventional Icon</div>
+          <h2 class="story-title">Crafted for Pure Indulgence</h2>
+          <p class="story-desc">
+            An iconic blend of smooth milk chocolate wrapped around a rich caramel nougat center. Every 5 Star bar is engineered for the ultimate melt-in-mouth experience.
+          </p>
+          <div class="story-feature-list">
+            <span class="feature-pill">Rich Milk Chocolate</span>
+            <span class="feature-pill">Golden Ribbon Caramel</span>
+          </div>
+        </article>
+
+        <!-- Chapter 02 -->
+        <article id="story-2" class="story-card pos-right">
+          <div class="chapter-tag">Chapter 02 — Flowing Caramel</div>
+          <h2 class="story-title">Liquid Gold Explosion</h2>
+          <p class="story-desc">
+            As the outer shell snaps, lush gooey caramel bursts forth in golden streams, fusing chewy nougat and chocolate in a irresistible symphony.
+          </p>
+          <div class="story-feature-list">
+            <span class="feature-pill">Gooey Texture</span>
+            <span class="feature-pill">Deep Cocoa Flavor</span>
+          </div>
+        </article>
+
+        <!-- Chapter 03 -->
+        <article id="story-3" class="story-card pos-left">
+          <div class="chapter-tag">Chapter 03 — Texture & Crunch</div>
+          <h2 class="story-title">Crispy Peanut Collision</h2>
+          <p class="story-desc">
+            Roasted crunchy peanuts collide with soft velvety nougat, delivering a multi-sensory contrast that keeps every bite exciting.
+          </p>
+          <div class="story-feature-list">
+            <span class="feature-pill">Roasted Peanuts</span>
+            <span class="feature-pill">Chewy Nougat</span>
+          </div>
+        </article>
+
+        <!-- Chapter 04 -->
+        <article id="story-4" class="story-card pos-center">
+          <div class="chapter-tag">Chapter 04 — Master the Art</div>
+          <h2 class="story-title">Eat 5 Star. Do Nothing.</h2>
+          <p class="story-desc">
+            When life gets busy, take a pause. Unwrap a 5 Star, let the golden caramel slow down time, and embrace the legendary philosophy of doing nothing.
+          </p>
+          <div class="story-feature-list">
+            <span class="feature-pill">Zero Effort Required</span>
+            <span class="feature-pill">100% Satisfaction</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Side Navigation Dots -->
+      <nav class="side-nav" aria-label="Chapter navigation">
+        <div class="nav-dot-wrapper" data-frame="35">
+          <div class="nav-dot"></div>
+          <span class="dot-label">01. Icon</span>
+        </div>
+        <div class="nav-dot-wrapper" data-frame="95">
+          <div class="nav-dot"></div>
+          <span class="dot-label">02. Caramel</span>
+        </div>
+        <div class="nav-dot-wrapper" data-frame="150">
+          <div class="nav-dot"></div>
+          <span class="dot-label">03. Crunch</span>
+        </div>
+        <div class="nav-dot-wrapper" data-frame="195">
+          <div class="nav-dot"></div>
+          <span class="dot-label">04. Do Nothing</span>
+        </div>
+      </nav>
+
+      <!-- Bottom Controls & Timeline Scrubber -->
+      <div class="bottom-controls">
+        <button id="play-toggle-btn" class="play-toggle-btn" aria-label="Toggle Auto Play">▶</button>
+        
+        <div class="timeline-wrapper">
+          <div class="timeline-slider-container">
+            <input type="range" id="timeline-range" class="timeline-range" min="0" max="209" value="0">
+          </div>
+          <div class="timeline-meta">
+            <span>SEQUENCE TIMELINE</span>
+            <span id="frame-indicator" class="frame-indicator">FRAME 001 / 210</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 4. SPECS DRAWER / MODAL -->
+  <div id="specs-drawer" class="drawer-overlay" role="dialog" aria-modal="true">
+    <div class="drawer-content">
+      <button id="close-specs-btn" class="close-drawer-btn" aria-label="Close dialog">&times;</button>
+      
+      <div class="drawer-header">
+        <div class="drawer-tag">Product Masterclass</div>
+        <h3 class="drawer-title">The Anatomy of 5 Star</h3>
+      </div>
+
+      <div class="ingredients-grid">
+        <div class="ingredient-card">
+          <div class="ingredient-icon">🍫</div>
+          <div class="ingredient-info">
+            <h4>Milk Chocolate Shell</h4>
+            <p>Made with sustainably sourced cocoa beans for a velvety smooth coat.</p>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <div class="ingredient-icon">🍯</div>
+          <div class="ingredient-info">
+            <h4>Golden Caramel</h4>
+            <p>Slow-cooked golden syrup that stretches into delicious ribbons.</p>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <div class="ingredient-icon">🥜</div>
+          <div class="ingredient-info">
+            <h4>Roasted Peanuts</h4>
+            <p>Lightly salted roasted peanuts for the ultimate crunch factor.</p>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <div class="ingredient-icon">⚡</div>
+          <div class="ingredient-info">
+            <h4>Chewy Nougat Core</h4>
+            <p>Fluffy whipped nougat center designed for max satisfying chewiness.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ARTISAN CRAFT SECTIONS (FROM CODE.HTML EXCLUDING NAVBAR & HERO) -->
+  <div class="relative w-full bg-background text-on-background overflow-hidden z-10">
+    <div class="fixed inset-0 pointer-events-none z-0 mix-blend-screen opacity-10">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(212,175,55,0.15)_0%,_transparent_60%)]"></div>
+    </div>
+
+    <!-- SECTION 01: THE ORIGIN -->
+    <section class="relative py-32 w-full z-10 bg-surface">
+      <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+        <div class="lg:col-span-5 relative z-10 order-2 lg:order-1 lg:pr-12">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="font-display-lg text-[40px] text-primary/20 leading-none">01</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">The Origin</h2>
+          </div>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8">
+            Our journey begins in the shaded understory of ancient rainforests. We source only the rarest Criollo and Trinitario cacao beans, selected for their complex flavor profiles and deep, resonant aromas. Each pod is hand-harvested at the exact moment of peak ripeness.
+          </p>
+          <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <div class="relative z-10 flex gap-6 items-start">
+              <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary">psychiatry</span>
+              </div>
+              <div>
+                <h4 class="font-title-md text-title-md text-on-surface mb-2">Sustainable Harvesting</h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Cultivated in harmony with the environment, ensuring the preservation of the rainforest canopy and the livelihoods of our generational farming partners.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 relative order-1 lg:order-2 mb-12 lg:mb-0">
+          <div class="relative w-full aspect-[4/5] lg:aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl group">
+            <div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-105" data-alt="A close-up, highly detailed shot of raw cacao pods in a lush, humid rainforest setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUIMMRZLV5Yr_qVjxVsthXopyogjGPSoDS7r_5dsPbdEWLigE7GQppw4NEjD_IQztjO736rBKxvt9r8q7Uo0dJ52ztq0akQCeoQFUQVqF8PigNasaDhhgBSNIs5CfEzIz8Bn6r8bXkINxItF7fvT4u-TqRkPHL1vzFtPjrhsj7wpj3rCtx05EUufTibrzajW15pmrsioQxrGaRtMK8zkJZfOYE7C5OCirJDHdNCT62m9072CoRwdvk')"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="absolute -bottom-8 -left-8 w-48 h-64 rounded-xl overflow-hidden shadow-xl hidden lg:block" data-alt="Macro shot of roasted cacao nibs" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALHcQjXH_sr8qpcAvYurPudtpW4kbIxKLt6JMDtb9kLG0fy32EBKGyxQ4q9zc1nRF7sdGFC_AgwQQxkk1nxfNpP92xYMc2_VPJNPcFXZSsJQZEtDzfrc1TQT-O7XnGyP0tvNSvUJ4ufoD8O7MgpBhxIFeHm3au_OjjwcMOhN_brAzoQe4lsTv8o-4bD6WRYiFPI3W6Myk-EctrlMzd8tnGiS88gQFyxVCBT7vyFQQ4kz-XrXcPwG5G')"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: THE ALCHEMY -->
+    <section class="relative py-32 w-full z-10 bg-background overflow-hidden">
+      <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+        <div class="lg:col-span-7 relative mb-12 lg:mb-0">
+          <div class="grid grid-cols-2 gap-4 h-[600px]">
+            <div class="flex flex-col gap-4 translate-y-8">
+              <div class="h-3/5 w-full rounded-2xl overflow-hidden shadow-lg relative group">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACL7kJvvICTyY5wZqj1qN4wo9Bj416Kg_JRAeYaQ5BKWcSLnGYryZgjCgQsF03Qme2nAu0dqzoIV-IjSzHCTgymYiWNP0DMNTzlnIQKfurQaO3NCp01nnDX28lxbFxrlFGBiRV5BEjo83jRCEdb20M1Xq3W2cTe9vNYfE_sKxidIZhV8M0hMVxyW6gZltDmTZYIYYoLMheOcO-2RPIiIY7sLxzHuh1nTbVdjmdRWXgilKmJ7YBFCUj')"></div>
+              </div>
+              <div class="h-2/5 w-full rounded-2xl overflow-hidden shadow-lg relative group bg-surface-container flex items-center justify-center p-6">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
+                <p class="font-body-lg text-body-lg text-on-surface text-center italic relative z-10">"The true magic lies not just in the ingredients, but in the precise calibration of temperature and time."</p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-4 -translate-y-8">
+              <div class="h-2/5 w-full rounded-2xl overflow-hidden shadow-lg relative group">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvJa4C82Q-OpRWI_g8Imykqaa9ikZVpRsfWi07op46M-iGrNA_XSuTcbZsICPyvQM7M3Nhz4lYgV4fhgnzjTVE7u_nmJgsnyOW33WQjhZtnZyti3-JBB7pC6WgIXvzMQzCm4nao6ybavQKTuXO402RPemBpTE_59awTtWfMzQhymVBVJgVJMi7DZqWZnYTaYRFu7X8PYrZcD3ejpTK8ahPp1vp11wvqN9q54eVthIRv9a9hoOVA1zF')"></div>
+              </div>
+              <div class="h-3/5 w-full rounded-2xl overflow-hidden shadow-lg relative group">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZ46AtUeZvVbCZCblW9R-vB_exQLJgay78VGdHnYT8wipKd2_yiBNyV3mjHRVjXeP5wq4bFHHdNOq5XFgssGzhOxpSvU1mNaL3MXKPCeDEmojHJQtJ8tEZoJ5S9bGLRVvdHZqo6CxuExE6cm-_q0WDSjILFu95Vk0PO7KHYrvrQySqYvkypHsspZ8i0UopueKUkRPkodT3-N8gLip_c-bR6KAQLkQsyR1nhZYRALC_h4_pGuDWmozu')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-5 relative z-10 lg:pl-12">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="font-display-lg text-[40px] text-primary/20 leading-none">02</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-background">The Alchemy</h2>
+          </div>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8">
+            Crafting the perfect confection is an exercise in precise alchemy. We begin with a foundation of slow-whipped nougat, aerated to achieve a cloud-like texture that yields instantly upon tasting.
+          </p>
+          <div class="space-y-6">
+            <div class="flex flex-col border-l border-primary/20 pl-6 pb-6 relative">
+              <div class="absolute w-2 h-2 rounded-full bg-primary -left-[4.5px] top-2"></div>
+              <h4 class="font-title-md text-title-md text-on-background mb-2">The Golden Ribbon</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Over this, we drape a ribbon of deeply caramelized sugar, touched with hand-harvested sea salt. The caramel is cooked until it reaches the exact temperature where sweet transitions into a complex, roasted resonance.</p>
+            </div>
+            <div class="flex flex-col border-l border-primary/20 pl-6 relative">
+              <div class="absolute w-2 h-2 rounded-full bg-primary -left-[4.5px] top-2 shadow-[0_0_10px_rgba(212,175,55,0.8)]"></div>
+              <h4 class="font-title-md text-title-md text-on-background mb-2">The Final Enrobing</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Finally, the layered core is enrobed in a thick shell of our signature 72% dark chocolate, sealing the delicate textures within a crisp, satisfying snap.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: THE LEGACY -->
+    <section class="relative py-40 w-full z-10 bg-surface-container-lowest">
+      <div class="max-w-container-max mx-auto px-margin-desktop flex flex-col items-center text-center">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="font-display-lg text-[40px] text-primary/20 leading-none">03</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-background">The Legacy</h2>
+        </div>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed mb-20">
+          Inspired by the timeless architecture of flavor found in the classic 5 Star, we have reimagined this iconic profile through the lens of uncompromising luxury. It is a tribute to childhood nostalgia, elevated by masterful technique.
+        </p>
+      </div>
+      <div class="w-full relative h-[716px] flex items-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center fixed-attachment lg:bg-fixed" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIG6fvSaTi5KR86fI6ZEET_En4QtCrcnUlZ45C2WiNubqQ3qgzUO0tnqynGa2p1gw6z4Hmx2Z5S8RpYkavopcZkNFBYmjHvdk8od1nBpaVG97eI5aB4XBPPa7Jn6zyEmYg8sF8gSWV2idEdm7EqyFMRs3lvp4rJ-2pUNslDN7RHJmB38OYLIGW2s5h2YUdSUtGmtGJOyVYLShoG8UcJukKTZ0n8dHHakUAFPJWjSgnluFZ40nANXtg')"></div>
+        <div class="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-surface/80 backdrop-blur-xl p-10 rounded-2xl border border-primary/10 shadow-2xl flex flex-col items-center text-center transform transition-transform hover:-translate-y-2 duration-500">
+            <span class="material-symbols-outlined text-[40px] text-primary mb-6" style="font-variation-settings: 'FILL' 0;">history_edu</span>
+            <h3 class="font-title-md text-title-md text-on-surface mb-4">Heritage</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Honoring the traditional methods of European chocolatiers, adapted for a modern, complex palate.</p>
+          </div>
+          <div class="bg-surface/80 backdrop-blur-xl p-10 rounded-2xl border border-primary/10 shadow-2xl flex flex-col items-center text-center transform transition-transform hover:-translate-y-2 duration-500 md:-translate-y-8">
+            <span class="material-symbols-outlined text-[40px] text-primary mb-6" style="font-variation-settings: 'FILL' 1;">stars</span>
+            <h3 class="font-title-md text-title-md text-on-surface mb-4">The Standard</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Setting a new benchmark for layered confections, where every element must stand perfectly on its own.</p>
+          </div>
+          <div class="bg-surface/80 backdrop-blur-xl p-10 rounded-2xl border border-primary/10 shadow-2xl flex flex-col items-center text-center transform transition-transform hover:-translate-y-2 duration-500">
+            <span class="material-symbols-outlined text-[40px] text-primary mb-6" style="font-variation-settings: 'FILL' 0;">diamond</span>
+            <h3 class="font-title-md text-title-md text-on-surface mb-4">Rarity</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Produced in strictly limited micro-batches to ensure complete control over the tempering and setting process.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-surface-container-lowest border-t border-primary/10 py-16">
+      <div class="max-w-[1440px] mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-gutter items-start">
+        <div class="flex flex-col gap-unit">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="font-headline-lg text-body-lg text-primary uppercase tracking-widest">5 STAR CACAO RESERVE</span>
+          </div>
+          <p class="text-on-surface-variant font-body-sm text-body-sm leading-relaxed max-w-xs">The intersection of cinematic luxury and the world's finest chocolate craftsmanship.</p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4 class="font-label-caps text-label-caps text-primary">Newsletter</h4>
+          <div class="flex border-b border-primary/30 pb-2">
+            <input class="bg-transparent border-none outline-none font-body-sm text-on-surface flex-1 placeholder:text-outline-variant" placeholder="Enter your email" type="email"/>
+            <button class="font-label-caps text-label-caps text-primary uppercase">Subscribe</button>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 items-end">
+          <h4 class="font-label-caps text-label-caps text-primary">Follow Us</h4>
+          <div class="flex gap-6">
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">podcasts</span>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">movie</span>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-[1440px] mx-auto px-margin-desktop mt-12 pt-8 border-t border-primary/5 text-center font-label-caps text-[10px] text-outline tracking-widest">© 2024 CADBURY 5 STAR RESERVE. ALL RIGHTS RESERVED.</div>
+    </footer>
+  </div>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
