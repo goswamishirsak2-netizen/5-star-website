@@ -1,9 +1,0 @@
-{
-  "name": "5-star-website",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Cadbury 5 Star Interactive 3D Scroll Animation Web App",
-  "scripts": {
-    "dev": "python -m http.server 8000"
-  }
-}
